@@ -1,0 +1,2 @@
+# Présentation du projet
+Ce projet sera la nouvelle API REST de BraemMedia. Elle utilise comme technologie NodeJS et ExpressJS avec comme base de données MongoDB. En plus de rechercher des médias, l'API aura comme rôle la création d'un compte ou mettre des avis sur un média.
