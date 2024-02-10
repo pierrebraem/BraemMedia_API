@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const middleware = require('../middleware/user')
+const { getUser, checkIfUserExist } = require('../middlewares/user')
 
-router.get('/:id', middleware.getUser, (req, res) => {
+router.get('/:id', getUser, (req, res) => {
     res.send(res.user)
 })
 
-router.post('/', middleware.checkIfUserExist, async (req, res) => {
+router.post('/', checkIfUserExist, async (req, res) => {
     const user = new User({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -26,7 +26,7 @@ router.post('/', middleware.checkIfUserExist, async (req, res) => {
     }
 })
 
-router.patch('/:id', middleware.getUser, middleware.checkIfUserExist, async (req, res) => {
+router.patch('/:id', getUser, checkIfUserExist, async (req, res) => {
     if(req.body.firstname != null){
         res.user.firstname = req.body.firstname
     }
@@ -63,7 +63,7 @@ router.patch('/:id', middleware.getUser, middleware.checkIfUserExist, async (req
     }
 })
 
-router.delete('/:id', middleware.getUser, async (req, res) => {
+router.delete('/:id', getUser, async (req, res) => {
     try{
         await res.user.deleteOne()
         res.json({ message: "User deleted successfully" })

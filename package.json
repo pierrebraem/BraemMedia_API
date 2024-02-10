@@ -4,7 +4,7 @@
   "description": "REST API for BraemMedia",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon src/server.js"
   },
   "author": "Pierre Braem",
   "license": "ISC",

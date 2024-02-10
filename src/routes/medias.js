@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Media = require('../models/media')
-const middleware = require('../middleware/media')
+const { getMedia } = require('../middlewares/media')
 
-router.get('/:id', middleware.getMedia, (req, res) => {
+router.get('/:id', getMedia, (req, res) => {
     res.send(res.media)
 })
 
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.patch('/:id', middleware.getMedia, async (req, res) => {
+router.patch('/:id', getMedia, async (req, res) => {
     if(req.body.name != null){
         res.media.name = req.body.name
     }
@@ -67,7 +67,7 @@ router.patch('/:id', middleware.getMedia, async (req, res) => {
     }
 })
 
-router.delete('/:id', middleware.getMedia, async (req, res) => {
+router.delete('/:id', getMedia, async (req, res) => {
     try{
         await res.media.deleteOne()
         res.json({ message: "Media deleted successfully" })
