@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require("bcrypt")
 const User = require('../models/user')
 const { getUser, checkIfUserExist } = require('../middlewares/user')
 
@@ -8,6 +9,8 @@ router.get('/:id', getUser, (req, res) => {
 })
 
 router.post('/', checkIfUserExist, async (req, res) => {
+    const salt = await bcrypt.genSalt(12)
+
     const user = new User({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -15,7 +18,7 @@ router.post('/', checkIfUserExist, async (req, res) => {
         email: req.body.email,
         birthdate: req.body.birthdate,
         photo: req.body.photo,
-        password: req.body.password
+        password: await bcrypt.hash(req.body.password, salt)
     })
 
     try{
