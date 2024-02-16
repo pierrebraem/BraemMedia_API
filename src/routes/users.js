@@ -14,7 +14,8 @@ router.post('/', checkIfUserExist, async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         birthdate: req.body.birthdate,
-        photo: req.body.photo
+        photo: req.body.photo,
+        password: req.body.password
     })
 
     try{
