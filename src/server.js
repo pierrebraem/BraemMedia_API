@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const usersRouter = require('./routes/users')
 const mediasRouter = require('./routes/medias')
 const loginRouter = require('./routes/login')
+const reviewRouter = require('./routes/reviews')
 
 mongoose.connect(process.env.DATABASE_URL)
 const db = mongoose.connection
@@ -18,5 +19,6 @@ app.use(express.json())
 app.use('/v1/users', usersRouter)
 app.use('/v1/medias', mediasRouter)
 app.use('/v1/login', loginRouter)
+app.use('/v1/reviews', reviewRouter)
 
 app.listen(3000, () => console.log('Server is running'))
