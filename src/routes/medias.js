@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Media = require('../models/media')
+const Review = require('../models/review')
 const { getMedia } = require('../middlewares/media')
 
 router.get('/:id', getMedia, (req, res) => {
@@ -74,6 +75,7 @@ router.patch('/:id', getMedia, async (req, res) => {
 
 router.delete('/:id', getMedia, async (req, res) => {
     try{
+        await Review.deleteMany({ idmedia: req.params.id })
         await res.media.deleteOne()
         res.json({ message: "Media deleted successfully" })
     }

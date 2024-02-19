@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require("bcrypt")
 const User = require('../models/user')
+const Review = require('../models/review')
 const { getUser, checkIfUserExist } = require('../middlewares/user')
 
 router.get('/:id', getUser, (req, res) => {
@@ -69,6 +70,7 @@ router.patch('/:id', getUser, checkIfUserExist, async (req, res) => {
 
 router.delete('/:id', getUser, async (req, res) => {
     try{
+        await Review.deleteMany({ iduser: req.params.id })
         await res.user.deleteOne()
         res.json({ message: "User deleted successfully" })
     }
