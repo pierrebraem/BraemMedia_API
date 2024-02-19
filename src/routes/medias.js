@@ -15,7 +15,8 @@ router.post('/', async (req, res) => {
         description: req.body.description,
         poster: req.body.poster,
         runtime: req.body.runtime,
-        dvd_released: req.body.dvd_released
+        dvd_released: req.body.dvd_released,
+        saisons: req.body.saisons
     })
 
     try{
@@ -54,6 +55,10 @@ router.patch('/:id', getMedia, async (req, res) => {
 
     if(req.body.dvd_released != null){
         res.media.dvd_released = req.body.dvd_released
+    }
+
+    if(req.body.saisons != null){
+        res.media.saisons = req.body.saisons
     }
 
     res.media.updatedAt = new Date
