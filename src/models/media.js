@@ -20,6 +20,11 @@ const mediaSchema = new mongoose.Schema({
         required: true,
         minLength: 10
     },
+    sorts: {
+        type: [String],
+        required: true,
+        validate: { validator: sorts => sorts.length > 0, message: "sorts is empty" }
+    },
     poster: {
         type: String,
         default: null
@@ -66,6 +71,11 @@ const mediaSchema = new mongoose.Schema({
         }],
         default: null,
         _id: false
+    },
+    /* Informations sur les jeux-vidéo uniquement */
+    platforms: {
+        type: [String],
+        default: null
     },
     /* Informations mise à jour */
     createdAt: {

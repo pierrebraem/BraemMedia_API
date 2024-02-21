@@ -14,10 +14,12 @@ router.post('/', async (req, res) => {
         released: req.body.released,
         type: req.body.type,
         description: req.body.description,
+        sorts: req.body.sorts,
         poster: req.body.poster,
         runtime: req.body.runtime,
         dvd_released: req.body.dvd_released,
-        saisons: req.body.saisons
+        saisons: req.body.saisons,
+        platforms: req.body.platforms
     })
 
     try{
