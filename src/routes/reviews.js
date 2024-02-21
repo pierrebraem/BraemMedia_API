@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Review = require('../models/review')
 
-const { getReview } = require('../middlewares/review')
+const { getReview, checkIfReviewExist } = require('../middlewares/review')
 const { getMedia } = require('../middlewares/media')
 const { getUser } = require('../middlewares/user')
 
@@ -36,7 +36,7 @@ router.get('/user/:id', getUser, async (req, res) => {
     }    
 })
 
-router.post('/', async (req, res) => {
+router.post('/', checkIfReviewExist, async (req, res) => {
     const review = new Review({
         iduser: req.body.iduser,
         idmedia: req.body.idmedia,
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
 
     try{
         await review.save()
-        res.status(201).json({ message: "review created succefully" })
+        res.status(201).json({ message: "Review created succefully" })
     }
     catch(error){
         res.status(400).json({ message: error.message })
