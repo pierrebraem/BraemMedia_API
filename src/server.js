@@ -9,6 +9,7 @@ const mediasRouter = require('./routes/medias')
 const loginRouter = require('./routes/login')
 const reviewRouter = require('./routes/reviews')
 const searchRouter = require('./routes/search')
+const helloRouter = require('./routes/hello')
 
 mongoose.connect(process.env.DATABASE_URL)
 const db = mongoose.connection
@@ -22,5 +23,6 @@ app.use('/v1/medias', mediasRouter)
 app.use('/v1/login', loginRouter)
 app.use('/v1/reviews', reviewRouter)
 app.use('/v1/search', searchRouter)
+app.use('/v1/hello', helloRouter)
 
 app.listen(3000, () => console.log('Server is running'))
